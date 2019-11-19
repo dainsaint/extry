@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import { GoogleMap, Marker } from "react-google-maps"
-
 import axios from 'axios';
 import sugar from 'sugar';
-
-
-import ODPListTemplate from './templates/ODPListTemplate.js';
-
+import ta from 'time-ago';
+import v from 'voca';
 
 class PHLCartoDebug extends Component {
 
@@ -26,8 +22,6 @@ class PHLCartoDebug extends Component {
       baseURL: "https://phl.carto.com/api/v2/"
     });
 
-
-
     api.get( '/sql',{
       params:{
         q: "SELECT * FROM li_case_inspections ORDER BY inspectioncompleted DESC LIMIT 10 "
@@ -43,27 +37,45 @@ class PHLCartoDebug extends Component {
     .then ( response => this.setState( {count : response.data.rows[0].count }))
   }
 
-
+  inspectionIcon( status )
+  {
+    switch(status)
+    {
+      case 'Passed': return <span className="tag tag--success">Passed</span>;
+      case 'Failed': return <span className="tag tag--danger">Failed</span>;
+      case 'Closed': return <span className="tag tag--secondary">Closed</span>;
+      case 'None': return <span className="tag tag--info">None</span>;
+    }
+  }
 
   render() {
-    const listItems = this.state.data.map( data => <ODPListTemplate data={data}/> );
+    const listItems = this.state.data.from(1).map( data => (
 
-    const googleMapsAPIKey = "AIzaSyCXvsIAI6N8ihCNyP8zNQRA8Uoly_ngx9M";
+      <div className="tile tile--center">
+        <div class="tile__container">
+          <p className="tile__title">{ v.titleCase(data.address) } </p>
+          <p className="tile__subtitle">{ v.titleCase(data.ownername) }</p>
+          <span class="info">{ta.ago(data.inspectioncompleted)}</span>
+        </div>
+
+        <p class="tile__buttons">
+          { this.inspectionIcon( data.inspectionstatus ) }
+        </p>
+
+      </div>
+
+    ) );
 
     return (
       <div>
         <h2>Most Recent Case Inspections</h2>
         <pre>{ this.state.count } Failed</pre>
-        <div id="map"></div>
-        <ul className="uk-list uk-list-divider">
+        <div>
             {listItems}
-        </ul>
-
+        </div>
       </div>
     );
   }
 }
-
-
 
 export default PHLCartoDebug;
