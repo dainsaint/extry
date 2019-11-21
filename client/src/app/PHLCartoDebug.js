@@ -33,7 +33,7 @@ class PHLCartoDebug extends Component {
 
 
   render() {
-    // const listItems = this.state.items.map( item => <ListTemplate key={ item.id } item={item}/> );
+    // const listItems  = this.state.items.map( item => <ListTemplate key={ item.id } item={item}/> );
 
 
     return (

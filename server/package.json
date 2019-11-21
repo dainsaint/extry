@@ -1,11 +1,13 @@
 {
-  "name": "extry",
+  "name": "extry-server",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
+    "build": "babel . --ignore node_modules,build --out-dir build",
     "start": "./node_modules/nodemon/bin/nodemon.js app.js --exec 'node'",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "start:prod": "node build/app.js"
+
   },
   "repository": {
     "type": "git",
@@ -17,6 +19,7 @@
   "dependencies": {
     "@google/maps": "^1.0.2",
     "axios": "^0.19.0",
+    "babel-cli": "^6.26.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "gcal": "^1.0.3",
