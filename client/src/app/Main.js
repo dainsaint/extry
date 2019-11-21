@@ -8,7 +8,6 @@ class Main extends Component {
   render() {
     return (
       <main className="uk-container">
-        <ProcessDebug/>
         <PHLCartoDebug/>
       </main>
     );

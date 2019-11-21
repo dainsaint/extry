@@ -23,7 +23,7 @@ class PHLCartoDebug extends Component {
   componentDidMount()
   {
     var api = axios.create({
-      baseURL: "//localhost:4000"
+      baseURL: "/"
     });
 
     api.get( '/google' )
@@ -38,7 +38,6 @@ class PHLCartoDebug extends Component {
 
     return (
       <section>
-        <pre>{ JSON.stringify(process.env) }</pre>
         <h2>Properties With Zoning Hearings</h2>
         <MapTemplate items={ this.state.items }/>
       </section>
