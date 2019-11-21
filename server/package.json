@@ -14,12 +14,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@google/maps": "^1.0.2",
+    "axios": "^0.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "gcal": "^1.0.3",
+    "googleapis": "^45.0.0",
+    "node-zillow": "^2.0.0",
     "nodemon": "^1.19.4",
     "passport": "^0.4.0",
     "passport-google-oauth": "^2.0.0",
+    "rxjs": "^6.5.3",
     "sugar": "^2.0.6"
   }
 }

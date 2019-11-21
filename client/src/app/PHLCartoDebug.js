@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { GoogleMap, Marker } from "react-google-maps"
 
 import axios from 'axios';
-import sugar from 'sugar';
 
 
-import ODPListTemplate from './templates/ODPListTemplate.js';
+
+import ListTemplate from './templates/ListTemplate.js';
+import MapTemplate from './templates/MapTemplate.js';
 
 
 class PHLCartoDebug extends Component {
@@ -13,9 +13,9 @@ class PHLCartoDebug extends Component {
   constructor(props)
   {
     super(props);
-    sugar.extend();
+
     this.state = {
-      data: [],
+      items: [],
       count: "0"
     }
   }
@@ -23,43 +23,25 @@ class PHLCartoDebug extends Component {
   componentDidMount()
   {
     var api = axios.create({
-      baseURL: "https://phl.carto.com/api/v2/"
+      baseURL: "//localhost:4000"
     });
 
+    api.get( '/google' )
+      .then( result => this.setState({ items: result.data }) );
 
-
-    api.get( '/sql',{
-      params:{
-        q: "SELECT * FROM li_case_inspections ORDER BY inspectioncompleted DESC LIMIT 10 "
-      }
-    })
-      .then( response => this.setState({ data: response.data.rows }) );
-
-    api.get( '/sql', {
-      params:{
-        q: "SELECT COUNT(ownername) FROM li_case_inspections WHERE inspectionstatus = 'Failed'"
-      }
-    })
-    .then ( response => this.setState( {count : response.data.rows[0].count }))
   }
 
 
-
   render() {
-    const listItems = this.state.data.map( data => <ODPListTemplate data={data}/> );
+    // const listItems = this.state.items.map( item => <ListTemplate key={ item.id } item={item}/> );
 
-    const googleMapsAPIKey = "AIzaSyCXvsIAI6N8ihCNyP8zNQRA8Uoly_ngx9M";
 
     return (
-      <div>
-        <h2>Most Recent Case Inspections</h2>
-        <pre>{ this.state.count } Failed</pre>
-        <div id="map"></div>
-        <ul className="uk-list uk-list-divider">
-            {listItems}
-        </ul>
-
-      </div>
+      <section>
+        <pre>{ JSON.stringify(process.env) }</pre>
+        <h2>Properties With Zoning Hearings</h2>
+        <MapTemplate items={ this.state.items }/>
+      </section>
     );
   }
 }

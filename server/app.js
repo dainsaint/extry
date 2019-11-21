@@ -2,16 +2,20 @@
 const
   express = require('express')
   sugar = require('sugar');
+  cors = require('cors');
 
 //Modules
 const
   builder = require("./builder");
+  google = require("./google");
 
 const app = express()
 const port = process.env.PORT || 4000;
 
 sugar.extend();
 
-app.use( builder );
+app.use( cors({ origin: 'http://localhost:3000' } ) );
+// app.use( builder );
+app.use( google );
 app.listen( port );
 console.log(`Extry Server listening on port ${port}`)
