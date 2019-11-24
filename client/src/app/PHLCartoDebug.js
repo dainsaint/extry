@@ -33,14 +33,20 @@ class PHLCartoDebug extends Component {
 
 
   render() {
-    // const listItems  = this.state.items.map( item => <ListTemplate key={ item.id } item={item}/> );
 
+
+    const templates = {
+      Map: MapTemplate,
+      List: ListTemplate
+    };
+
+    const Template = templates[ this.props.type ] || MapTemplate;
 
     return (
-      <section>
-        <h2>Properties With Zoning Hearings</h2>
-        <MapTemplate items={ this.state.items }/>
-      </section>
+      <article className="uk-article uk-overflow-hidden">
+        <h1 className="uk-article-title">{ this.props.title }</h1>
+        <Template items={ this.state.items }/>
+      </article>
     );
   }
 }

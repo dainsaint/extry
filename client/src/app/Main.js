@@ -7,8 +7,11 @@ class Main extends Component {
 
   render() {
     return (
-      <main className="uk-container">
-        <PHLCartoDebug/>
+      <main>
+        <div className="uk-container">
+          <PHLCartoDebug title="Zoning Hearings" type="Map"/>
+          <PHLCartoDebug title="New Ice Cream Shops" type="Map"/>
+        </div>
       </main>
     );
   }
