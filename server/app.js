@@ -19,6 +19,6 @@ app.use( cors({ origin: 'http://localhost:3000' } ) );
 // app.use( builder );
 app.use( google );
 
-app.use('/*', staticFiles);
+app.use('/', staticFiles);
 app.listen( port );
 console.log(`Extry Server listening on port ${port}`)
