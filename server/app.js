@@ -10,7 +10,7 @@ const
   google = require("./google");
 
 const app = express()
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3001;
 const staticFiles = express.static( path.join(__dirname, '../../client/build') );
 
 sugar.extend();

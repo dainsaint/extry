@@ -9,14 +9,13 @@ const
 
 sugar.extend();
 
-const
-  fnaCalendarId = "fishtown.org_o0nu0h9itvqbfce7c2538qij70@group.calendar.google.com",
-  googleCalendarApiKey =  "AIzaSyCXvsIAI6N8ihCNyP8zNQRA8Uoly_ngx9M";
-  googleMapsApiKey = "AIzaSyA0zzOuoJnfsAJ1YIfPJ7RrtXeiYbdW-ZQ";
+const fnaCalendarId = "fishtown.org_o0nu0h9itvqbfce7c2538qij70@group.calendar.google.com",
+      googleCalendarApiKey =  "AIzaSyCXvsIAI6N8ihCNyP8zNQRA8Uoly_ngx9M",
+      googleMapsApiKey = "AIzaSyA0zzOuoJnfsAJ1YIfPJ7RrtXeiYbdW-ZQ";
 
 const
-  calendarApi = google.calendar({ version: "v3", auth: googleCalendarApiKey })
-  mapsApi = googleMaps.createClient({ key: googleMapsApiKey, Promise: Promise })
+  calendarApi = google.calendar({ version: "v3", auth: googleCalendarApiKey }),
+  mapsApi = googleMaps.createClient({ key: googleMapsApiKey, Promise: Promise });
 
 
 var app = module.exports = express();
