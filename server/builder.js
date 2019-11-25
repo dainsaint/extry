@@ -21,17 +21,12 @@ const
   fnaZoningMeetingScheduleCalendarUrl = "https://calendar.google.com/calendar/b/2/embed?showCalendars=0&amp;showTz=0&amp;mode=AGENDA&amp;height=480&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=fishtown.org_o0nu0h9itvqbfce7c2538qij70%40group.calendar.google.com&amp;color=%230F4B38&amp;ctz=America%2FNew_York";
   fnaCalendarId = "fishtown.org_o0nu0h9itvqbfce7c2538qij70@group.calendar.google.com";
 
-const
-  apiKeys = {
-    google: "AIzaSyCXvsIAI6N8ihCNyP8zNQRA8Uoly_ngx9M",
-    zillow: "X1-ZWz1hhgkuog3d7_8z2s9"
-  }
 
 
 const
   openDataPhillyApi = axios.create({ baseURL: "https://phl.carto.com/api/v2/" }),
-  zillowApi = new zillow( apiKeys.zillow ),
-  calendarApi = google.calendar({ version: "v3", auth: apiKeys.google });
+  zillowApi = new zillow( process.env.ZILLOW_API_KEY ),
+  calendarApi = google.calendar({ version: "v3", auth: process.env.GOOGLE_CALENDAR_API_KEY });
 
 const
   zillowFishtownId = "271178";

@@ -9,11 +9,8 @@ const
 
 sugar.extend();
 
-const fnaCalendarId = "fishtown.org_o0nu0h9itvqbfce7c2538qij70@group.calendar.google.com",
-      googleCalendarApiKey =  "AIzaSyCXvsIAI6N8ihCNyP8zNQRA8Uoly_ngx9M";
-
-
-const calendarApi = google.calendar({ version: "v3", auth: googleCalendarApiKey });
+const fnaCalendarId = "fishtown.org_o0nu0h9itvqbfce7c2538qij70@group.calendar.google.com";
+const calendarApi = google.calendar({ version: "v3", auth: process.env.GOOGLE_CALENDAR_API_KEY });
 
 
 var app = module.exports = express();
@@ -43,6 +40,7 @@ var toExtry = function( item )
 
 
 app.get( "/fna/meetings", async (req, res) =>{
+  
   try{
     const result = await calendarApi.events.list({
       calendarId: fnaCalendarId,

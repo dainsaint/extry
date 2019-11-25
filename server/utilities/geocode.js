@@ -1,8 +1,5 @@
 const googleMaps = require('@google/maps');
-
-const googleMapsApiKey = "AIzaSyA0zzOuoJnfsAJ1YIfPJ7RrtXeiYbdW-ZQ";
-
-const mapsApi = googleMaps.createClient({ key: googleMapsApiKey, Promise: Promise });
+const mapsApi = googleMaps.createClient({ key: process.env.GOOGLE_MAPS_API_KEY, Promise: Promise });
 
 var exports = module.exports = {};
 
@@ -27,6 +24,7 @@ exports.geocode = async function( address )
 
 exports.expand = async function( items )
 {
+
 
   const expandLocations = async () => Promise.all( items.map( e => exports.geocode(e.location.address) ) );
 

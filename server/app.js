@@ -3,7 +3,10 @@ const
   express = require('express'),
   path = require('path'),
   sugar = require('sugar'),
-  cors = require('cors');
+  cors = require('cors'),
+  dotenv = require('dotenv');
+
+dotenv.config();
 
 //Modules
 const
