@@ -13,7 +13,7 @@ const odpTransform = require( '../transformers/openDataPhillyTransformer.js' );
 var app = module.exports = express();
 
 const openDataPhillyApi = axios.create({ baseURL: "https://phl.carto.com/api/v2/" });
-
+const fishtownZips = ['19125', '19122', '19123', '19106'];
 
 var inspectionTransform =  function( item )
 {
@@ -35,7 +35,7 @@ var appealTransform =  function( item )
       id: item.cartodb_id,
       title: Case.title( item.address ),
       name: Case.title( item.ownername),
-      description: Case.sentence( item.appealgrounds, true ),
+      description: Case.sentence( item.appealgrounds ),
       location: {
         address: Case.title( item.address ),
         lat: item.geocode_x,
@@ -51,7 +51,7 @@ var appealTransform =  function( item )
 app.get( "/odp/inspections", async (req, res) => {
   const result = await openDataPhillyApi.get( '/sql',{
     params:{
-      q: "SELECT * FROM li_case_inspections ORDER BY inspectioncompleted DESC LIMIT 10 "
+      q: "SELECT * FROM li_case_inspections WHERE zip SIMILAR TO '(19125|19122|19123|19106)%' ORDER BY inspectioncompleted DESC LIMIT 10"
     }
   })
 
@@ -63,7 +63,7 @@ app.get( "/odp/inspections", async (req, res) => {
 app.get( "/odp/inspections/raw", async (req, res) => {
   const result = await openDataPhillyApi.get( '/sql',{
     params:{
-      q: "SELECT * FROM li_case_inspections ORDER BY inspectioncompleted DESC LIMIT 10 "
+      q: "SELECT * FROM li_case_inspections WHERE zip SIMILAR TO '(19125|19122|19123|19106)%' ORDER BY inspectioncompleted DESC LIMIT 10"
     }
   })
 
@@ -76,7 +76,7 @@ app.get( "/odp/inspections/raw", async (req, res) => {
 app.get( "/odp/appeals", async (req, res) => {
   const result = await openDataPhillyApi.get( '/sql',{
     params:{
-      q: "SELECT * FROM li_appeals ORDER BY processeddate DESC LIMIT 10 "
+      q: "SELECT * FROM li_appeals WHERE zip SIMILAR TO '(19125|19122|19123|19106)%' ORDER BY processeddate DESC LIMIT 10"
     }
   })
 
@@ -89,7 +89,7 @@ app.get( "/odp/appeals", async (req, res) => {
 app.get( "/odp/appeals/raw", async (req, res) => {
   const result = await openDataPhillyApi.get( '/sql',{
     params:{
-      q: "SELECT * FROM li_appeals ORDER BY processeddate DESC LIMIT 10 "
+      q: "SELECT * FROM li_appeals WHERE zip SIMILAR TO '(19125|19122|19123|19106)%' ORDER BY processeddate DESC LIMIT 10"
     }
   })
 
