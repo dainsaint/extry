@@ -6,18 +6,18 @@ import v from 'voca';
 class ListItemTemplate extends Component {
 
   render() {
-    const actionButton = this.props.item.action ? <a className="uk-button uk-button-primary" href={ this.props.item.action.url }>{ this.props.item.action.name }</a> : null;
+    const actionButton = this.props.item.action ? <a className="ui button primary" href={ this.props.item.action.url }>{ this.props.item.action.name }</a> : null;
     return (
-      <li>
+      <div className="item">
         <div>
-          <h3>
+          <h3 className="header">
             { v.titleCase( this.props.item.title) }
           </h3>
-          <p className="uk-text-meta">{ta.ago( this.props.item.datetime)}</p>
-          <p>{ ReactHtmlParser(this.props.item.description) }</p>
+          <p className="meta">{ta.ago( this.props.item.datetime)}</p>
+          <p className="description">{ ReactHtmlParser(this.props.item.description) }</p>
           <p>{ actionButton }</p>
         </div>
-      </li>
+      </div>
     )
   }
 }

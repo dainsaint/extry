@@ -7,6 +7,12 @@ import MapTemplate from './templates/MapTemplate.js'
 import ArticleTemplate from './templates/ArticleTemplate.js'
 
 
+
+const api = axios.create({
+  baseURL: "/"
+});
+
+
 class Section extends Component {
 
   constructor(props)
@@ -15,20 +21,31 @@ class Section extends Component {
 
     this.state = {
       items: [],
-      count: "0"
+      isLoading: false
     }
+  }
+
+  fetch()
+  {
+    this.setState({ isLoading: true });
+    api.get( this.props.endpoint || '/fna/meetings')
+      .then( result => {
+        console.log("get", result);
+        this.setState({ items: result.data, isLoading: false })
+      } );
   }
 
   componentDidMount()
   {
-    var api = axios.create({
-      baseURL: "/"
-    });
-
-    api.get( this.props.endpoint || '/fna/meetings')
-      .then( result => this.setState({ items: result.data }) );
-
+    this.fetch();
   }
+
+  componentDidUpdate( prevProps, prevState )
+  {
+    if( prevProps.endpoint != this.props.endpoint )
+      this.fetch();
+  }
+
 
 
   render() {
@@ -42,10 +59,19 @@ class Section extends Component {
 
     const Template = templates[ this.props.type ] || ListTemplate;
 
+    const loader = this.state.isLoading ?
+      <div className="ui active inverted dimmer">
+        <div className="ui text loader">Loading...</div>
+      </div>
+    : null;
+
     return (
-      <article className="uk-card uk-card-default uk-card-body uk-article">
-        <h2 className="uk-article-title">{ this.props.title }</h2>
+      <article className="ui segment ">
+        <h2 className="ui header">{ this.props.title }</h2>
+        <div>
         <Template items={ this.state.items }/>
+        { loader }
+        </div>
       </article>
     );
   }

@@ -11,8 +11,8 @@ class ArticleItemTemplate extends Component {
 
   render() {
     return (
-      <article className="uk-card">
-        <img src="https://placeimg.com/640/480/tech/grayscale" className="uk-width-1-1"/>
+      <article className="eight wide column">
+        <img src="https://placeimg.com/640/480/tech/grayscale" className="ui fluid image"/>
         <h3 className="uk-card-title">
           { v.titleCase( this.props.item.title) }
         </h3>

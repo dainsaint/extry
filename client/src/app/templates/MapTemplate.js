@@ -1,34 +1,29 @@
 import React, { Component } from 'react'
-// import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api'
+import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
+// import { GoogleMap, LoadScript, Marker } from '@react-g÷oogle-maps/api'
 
 
 class MapTemplate extends Component {
 
   render() {
-    const markers = this.props.items.map( item => <Marker name={item.location.address} position={item.location}/> );
+    const markers = this.props.items.map( item => <Marker key={item.id} name={item.location.address} position={item.location}/> );
     return (
-      <div style={{height: "300px;"}}>
-      <LoadScript
-          id="script-loader"
-          googleMapsApiKey = { process.env.REACT_APP_GOOGLE_MAPS_API_KEY }
-        >
-        <GoogleMap
+      <div style={{position:"relative", height: "300px"}}>
+
+        <Map
+          google={this.props.google}
           zoom={14}
-          center={{lat: 39.971882, lng: -75.128901}}
-          mapContainerStyle={{width:"100%", height:"300px"}}
+          initialCenter={{lat: 39.971882, lng: -75.128901}}
+          style={{width:"100%", height:"300px"}}
         >
           { markers }
-        </GoogleMap>
-      </LoadScript>
+        </Map>
+
       </div>
     )
   }
 }
 
-export default MapTemplate
-
-//
-// export default GoogleApiWrapper({
-//   apiKey: "AIzaSyA0zzOuoJnfsAJ1YIfPJ7RrtXeiYbdW-ZQ"
-// })(MapTemplate);
+export default GoogleApiWrapper({
+  apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
+})(MapTemplate);

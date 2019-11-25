@@ -11,11 +11,11 @@ class ListTemplate extends Component {
 
   render() {
     sugar.extend();
-    const items = this.props.items.map( item => <ListItemTemplate item={item}/> ).first(3);
+    const items = this.props.items.map( item => <ListItemTemplate key={item.id} item={item}/> ).first(3);
     return (
-      <ul className="uk-list">
+      <div className="ui items">
         { items }
-      </ul>
+      </div>
     )
   }
 }
