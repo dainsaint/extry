@@ -16,15 +16,21 @@ class Builder extends Component {
       sections: [
         {
           id: "ERUIO",
-          title: "Inspections",
-          endpoint: "/odp/inspections",
-          type: "Article"
+          title: "Community Zoning Meetings",
+          endpoint: "/fna/meetings",
+          type: "List"
+        },
+        {
+          id: "ERUIO",
+          title: "What properties are being discussed?",
+          endpoint: "/fna/meetings",
+          type: "Map"
         },
         {
           id: "IHFGD",
-          title: "Zoning Hearings - Map",
-          endpoint: "/fna/meetings",
-          type: "Map"
+          title: "Upcoming Inspections",
+          endpoint: "/odp/inspections",
+          type: "Article"
         }
       ]
     }
