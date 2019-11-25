@@ -25,7 +25,7 @@ class Section extends Component {
       baseURL: "/"
     });
 
-    api.get( '/odp/inspections' )
+    api.get( this.props.endpoint || '/fna/meetings')
       .then( result => this.setState({ items: result.data }) );
 
   }

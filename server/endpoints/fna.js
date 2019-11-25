@@ -25,12 +25,17 @@ var toExtry = function( item )
     return {
       id: item.id,
       title: item.summary,
+      description: item.description,
       datetime: item.start.dateTime,
       location: {
         address: address,
         lat: 0,
         lng: 0
       },
+      action: {
+        url: item.htmlLink,
+        name: "Add To Calendar"
+      }
 
     }
 }
@@ -48,6 +53,22 @@ app.get( "/fna/meetings", async (req, res) =>{
 
     const expanded = await geocode.expand( items );
     res.send( expanded );
+
+    // res.send( result.data.items.map( toExtry ) );
+  } catch(e) {
+    res.send(e);
+  }
+})
+
+
+app.get( "/fna/meetings/raw", async (req, res) =>{
+  try{
+    const result = await calendarApi.events.list({
+      calendarId: fnaCalendarId,
+    })
+
+    const data = result.data.items;
+    res.send( data );
 
     // res.send( result.data.items.map( toExtry ) );
   } catch(e) {

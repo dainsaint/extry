@@ -9,9 +9,10 @@ class Main extends Component {
     return (
       <main>
         <div className="uk-container">
-          <Section title="Zoning Hearings - Article" type="Article"/>
-          <Section title="Zoning Hearings - Map" type="Map"/>
-          <Section title="Zoning Hearings - List" type="List"/>
+          <Section title="Inspections" endpoint="/odp/inspections" type="Article"/>
+          <Section title="Zoning Hearings - Map" endpoint="/fna/meetings" type="Map"/>
+          <Section title="Zoning Hearings - List"  endpoint="/fna/meetings" type="List"/>
+          <Section title="Appeals"  endpoint="/odp/appeals" type="List"/>
         </div>
       </main>
     );

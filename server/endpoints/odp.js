@@ -60,6 +60,18 @@ app.get( "/odp/inspections", async (req, res) => {
   res.send( expanded );
 })
 
+app.get( "/odp/inspections/raw", async (req, res) => {
+  const result = await openDataPhillyApi.get( '/sql',{
+    params:{
+      q: "SELECT * FROM li_case_inspections ORDER BY inspectioncompleted DESC LIMIT 10 "
+    }
+  })
+
+  var items = result.data.rows;
+  res.send( items );
+})
+
+
 
 app.get( "/odp/appeals", async (req, res) => {
   const result = await openDataPhillyApi.get( '/sql',{
@@ -70,5 +82,17 @@ app.get( "/odp/appeals", async (req, res) => {
 
   var items = result.data.rows.map( appealTransform );
   const expanded = await geocode.expand( items );
+  res.send( items );
+})
+
+
+app.get( "/odp/appeals/raw", async (req, res) => {
+  const result = await openDataPhillyApi.get( '/sql',{
+    params:{
+      q: "SELECT * FROM li_appeals ORDER BY processeddate DESC LIMIT 10 "
+    }
+  })
+
+  var items = result.data.rows;
   res.send( items );
 })
