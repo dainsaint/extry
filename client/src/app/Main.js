@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import ProcessDebug from './ProcessDebug.js';
-import PHLCartoDebug from './PHLCartoDebug.js';
+import Section from './Section.js';
 
 class Main extends Component {
 
@@ -9,8 +9,9 @@ class Main extends Component {
     return (
       <main>
         <div className="uk-container">
-          <PHLCartoDebug title="Zoning Hearings" type="Map"/>
-          <PHLCartoDebug title="New Ice Cream Shops" type="Map"/>
+          <Section title="Zoning Hearings - Article" type="Article"/>
+          <Section title="Zoning Hearings - Map" type="Map"/>
+          <Section title="Zoning Hearings - List" type="List"/>
         </div>
       </main>
     );

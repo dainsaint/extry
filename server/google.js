@@ -63,13 +63,13 @@ app.get( "/google", async (req, res) =>{
     })
 
     const data = result.data.items;
-    const items = data.map( toExtry );
+    const items = data.map( toExtry ).filter( item => new Date(item.datetime).isFuture() ).sortBy( item => new Date(item.datetime) );
     const expandLocations = async () => Promise.all( items.map( e => geocode(e.location.address) ) );
 
     // const latLongs = await getLocations();
     try{
       const locations = await expandLocations();
-      items.forEach( (item, i) => item.location = locations[i] );
+      items.forEach( (item, i) => { item.location = locations[i] });
       res.send( items );
     } catch(error) {
       res.send( {error})
