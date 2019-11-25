@@ -25,7 +25,7 @@ class Section extends Component {
       baseURL: "/"
     });
 
-    api.get( '/google' )
+    api.get( '/odp/inspections' )
       .then( result => this.setState({ items: result.data }) );
 
   }
@@ -43,7 +43,7 @@ class Section extends Component {
     const Template = templates[ this.props.type ] || ListTemplate;
 
     return (
-      <article className="uk-article">
+      <article className="uk-card uk-card-default uk-card-body uk-article">
         <h2 className="uk-article-title">{ this.props.title }</h2>
         <Template items={ this.state.items }/>
       </article>

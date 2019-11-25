@@ -7,7 +7,8 @@ const
 
 //Modules
 const
-  google = require("./google");
+  fna = require("./endpoints/fna"),
+  odp = require("./endpoints/odp");
 
 const app = express()
 const port = process.env.PORT || 3001;
@@ -17,7 +18,8 @@ sugar.extend();
 
 app.use( cors({ origin: 'http://localhost:3000' } ) );
 // app.use( builder );
-app.use( google );
+app.use( fna );
+app.use( odp );
 
 app.use('/', staticFiles);
 app.listen( port );
