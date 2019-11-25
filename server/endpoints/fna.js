@@ -4,6 +4,7 @@ const
 
   axios = require('axios'),
   sugar = require('sugar'),
+  Case = require('case'),
 
   geocode = require('../utilities/geocode.js');
 
@@ -40,7 +41,7 @@ var toExtry = function( item )
 
 
 app.get( "/fna/meetings", async (req, res) =>{
-  
+
   try{
     const result = await calendarApi.events.list({
       calendarId: fnaCalendarId,

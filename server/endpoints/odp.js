@@ -2,7 +2,7 @@ const
   express = require('express'),
   sugar = require('sugar'),
   axios = require('axios'),
-  v = require('voca'),
+  Case = require('case'),
 
   geocode = require('../utilities/geocode.js');
 
@@ -19,9 +19,9 @@ var inspectionTransform =  function( item )
 {
     return {
       id: item.cartodb_id,
-      title: v.titleCase( item.address ),
+      title: Case.title( item.address ),
       location: {
-        address: v.titleCase( item.address ),
+        address: Case.title( item.address ),
         lat: item.geocode_x,
         long: item.geocode_y
       },
@@ -33,11 +33,11 @@ var appealTransform =  function( item )
 {
     return {
       id: item.cartodb_id,
-      title: v.titleCase( item.address ),
-      name: v.titleCase( item.ownername),
-      description: v.capitalize( item.appealgrounds, true ),
+      title: Case.title( item.address ),
+      name: Case.title( item.ownername),
+      description: Case.sentence( item.appealgrounds, true ),
       location: {
-        address: v.titleCase( item.address ),
+        address: Case.title( item.address ),
         lat: item.geocode_x,
         long: item.geocode_y
       },
