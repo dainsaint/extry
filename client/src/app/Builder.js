@@ -21,7 +21,7 @@ class Builder extends Component {
           type: "List"
         },
         {
-          id: "ERUIO",
+          id: "APFNL",
           title: "What properties are being discussed?",
           endpoint: "/fna/meetings",
           type: "Map"
