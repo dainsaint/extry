@@ -6,7 +6,7 @@ class Header extends Component {
   render() {
     return (
       <h1 className="ui header">
-          Extry
+          Extry Builder
       </h1>
     );
   }
