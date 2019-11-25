@@ -35,7 +35,7 @@ var appealTransform =  function( item )
       id: item.cartodb_id,
       title: v.titleCase( item.address ),
       name: v.titleCase( item.ownername),
-      description: v.titleCase( item.appealgrounds ),
+      description: v.capitalize( item.appealgrounds ),
       location: {
         address: v.titleCase( item.address ),
         lat: item.geocode_x,
