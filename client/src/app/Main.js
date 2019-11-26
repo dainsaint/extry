@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import ProcessDebug from './ProcessDebug.js';
-import Section from './Section.js';
+import Module from './Module.js';
 
 import sugar from 'sugar';
 
@@ -9,7 +9,7 @@ class Main extends Component {
 
   render() {
     sugar.extend();
-    const sections = this.props.sections.map( section => <Section key={section.id} title={ section.title } endpoint={ section.endpoint } type={ section.type }/> )
+    const modules = this.props.modules.map( module => <Module key={module.id} module={ module }/> )
     return (
       <main>
         <h1 className="ui header">
@@ -22,7 +22,7 @@ class Main extends Component {
         </h1>
 
         <div className="ui container">
-          { sections }
+          { modules }
         </div>
       </main>
     );

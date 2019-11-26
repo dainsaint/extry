@@ -11,7 +11,7 @@ class ListTemplate extends Component {
 
   render() {
     sugar.extend();
-    const items = this.props.items.map( item => <ListItemTemplate key={item.id} item={item}/> ).first(3);
+    const items = this.props.items.map( item => <ListItemTemplate key={item.id} item={item}/> ).first( this.props.count );
     return (
       <div className="ui items">
         { items }

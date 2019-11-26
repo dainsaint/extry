@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 
 import ListTemplate from './templates/ListTemplate.js'
+import CompactListTemplate from './templates/CompactListTemplate.js'
 import MapTemplate from './templates/MapTemplate.js'
 import ArticleTemplate from './templates/ArticleTemplate.js'
 
@@ -13,7 +14,7 @@ const api = axios.create({
 });
 
 
-class Section extends Component {
+class Element extends Component {
 
   constructor(props)
   {
@@ -27,10 +28,11 @@ class Section extends Component {
 
   fetch()
   {
+    console.log( 'FETCH' );
     this.setState({ isLoading: true });
-    api.get( this.props.endpoint || '/fna/meetings')
+    api.get( this.props.element.endpoint || '/fna/meetings')
       .then( result => {
-        console.log("get", result);
+        // console.log("get", result.data);
         this.setState({ items: result.data, isLoading: false })
       } );
   }
@@ -42,7 +44,8 @@ class Section extends Component {
 
   componentDidUpdate( prevProps, prevState )
   {
-    if( prevProps.endpoint != this.props.endpoint )
+
+    if( prevProps.element.endpoint != this.props.element.endpoint )
       this.fetch();
   }
 
@@ -54,29 +57,29 @@ class Section extends Component {
     const templates = {
       Map: MapTemplate,
       List: ListTemplate,
+      CompactList: CompactListTemplate,
       Article: ArticleTemplate
     };
 
-    const Template = templates[ this.props.type ] || ListTemplate;
+    const Template = templates[ this.props.element.type ] || ListTemplate;
+
+    
 
     const loader = this.state.isLoading ?
       <div className="ui active inverted dimmer">
         <div className="ui text loader">Loading...</div>
       </div>
-    : null;
+      : null
 
     return (
-      <article className="ui segment ">
-        <h2 className="ui header">{ this.props.title }</h2>
-        <div>
-        <Template items={ this.state.items }/>
+      <div className="ui segment vertical">
+        <Template items={ this.state.items } count={ this.props.element.count }/>
         { loader }
-        </div>
-      </article>
+      </div>
     );
   }
 }
 
 
 
-export default Section;
+export default Element;

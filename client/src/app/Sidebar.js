@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import Header from './Header.js';
-import SectionEditor from './editors/SectionEditor.js';
+import ModuleEditor from './editors/ModuleEditor.js';
 
 class Sidebar extends Component {
 
 
   render() {
-    const editors = this.props.sections.map( section => <SectionEditor key={section.id} section={section} onSectionChange={ this.props.onSectionChange }/> )
+    const editors = this.props.modules.map( module => <ModuleEditor key={module.id} module={module} onModuleChange={ this.props.onModuleChange }/> )
     return (
       <aside>
         <Header/>

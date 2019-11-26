@@ -13,24 +13,39 @@ class Builder extends Component {
     super(props);
 
     this.state = {
-      sections: [
+      modules: [
         {
           id: "ERUIO",
           title: "Community Zoning Meetings",
-          endpoint: "/fna/meetings",
-          type: "List"
+          summary: 'Want to get involved? All zoning meetings in Fishtown take place at the Fishtown Rec Center, <a href="https://maps.google.com/?q=1202+E+Montgomery+Ave&entry=gmail&source=g">1202 E Montgomery Ave</a>.',
+          elements: [
+            {
+              id: 'NLMSA',
+              endpoint: "/odp/appeals",
+              type: "List",
+              count: 1
+            },
+            {
+              id: 'ADNML',
+              endpoint: "/fna/meetings",
+              type: "CompactList",
+              count: 2
+            }
+          ]
         },
+
         {
-          id: "APFNL",
-          title: "What properties are being discussed?",
-          endpoint: "/fna/meetings",
-          type: "Map"
-        },
-        {
-          id: "IHFGD",
-          title: "Upcoming Inspections",
-          endpoint: "/odp/inspections",
-          type: "Article"
+          id: "ADAJO",
+          title: "Appeals",
+
+          elements: [
+            {
+              id: 'ADMLS',
+              endpoint: "/odp/appeals",
+              type: "Map",
+              count: 20
+            }
+          ]
         }
       ]
     }
@@ -42,16 +57,17 @@ class Builder extends Component {
   }
 
 
-  onSectionChange = ( id, update ) => {
+  onModuleChange = ( id, update ) => {
     this.setState( state => {
-      const sections = state.sections.map( section => {
-        if( section.id == id )
-          return { ...section, ...update };
+      const modules = state.modules.map( module => {
+
+        if( module.id === id )
+          return { ...module, ...update };
         else
-          return section;
+          return module;
       })
-      console.log( sections );
-      return { ...state, sections };
+
+      return { ...state, modules };
     });
   }
 
@@ -60,8 +76,8 @@ class Builder extends Component {
 
     return (
       <div className="app">
-        <Sidebar sections={ this.state.sections } onSectionChange={ this.onSectionChange }/>
-        <Main sections={ this.state.sections }/>
+        <Sidebar modules={ this.state.modules } onModuleChange={ this.onModuleChange }/>
+        <Main modules={ this.state.modules }/>
       </div>
     );
   }
