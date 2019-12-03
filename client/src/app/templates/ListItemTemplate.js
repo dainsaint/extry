@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import ta from 'time-ago';
-import v from 'voca';
+import Case from 'case';
 
 class ListItemTemplate extends Component {
 
@@ -11,7 +11,7 @@ class ListItemTemplate extends Component {
       <div className="item">
         <div>
           <h3 className="header">
-            { v.titleCase( this.props.item.title) }
+            { Case.title( this.props.item.title) }
           </h3>
           <p className="meta">{ta.ago( this.props.item.datetime)}</p>
           <p className="description">{ ReactHtmlParser(this.props.item.description) }</p>

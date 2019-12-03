@@ -45,7 +45,7 @@ class Element extends Component {
   componentDidUpdate( prevProps, prevState )
   {
 
-    if( prevProps.element.endpoint != this.props.element.endpoint )
+    if( prevProps.element.endpoint !== this.props.element.endpoint )
       this.fetch();
   }
 
@@ -63,7 +63,7 @@ class Element extends Component {
 
     const Template = templates[ this.props.element.type ] || ListTemplate;
 
-    
+
 
     const loader = this.state.isLoading ?
       <div className="ui active inverted dimmer">

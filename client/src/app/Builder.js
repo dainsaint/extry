@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import sugar from 'sugar';
 
 import Sidebar from './Sidebar.js';
-import Header from './Header.js';
 import Main from './Main.js';
 
 

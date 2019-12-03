@@ -20,6 +20,8 @@ var inspectionTransform =  function( item )
     return {
       id: item.cartodb_id,
       title: Case.title( item.address ),
+      name: Case.title( item.ownername ),
+      description: Case.sentence( item.inspectiondescription ),
       location: {
         address: Case.title( item.address ),
         lat: item.geocode_x,

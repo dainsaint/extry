@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import ReactHtmlParser from 'react-html-parser';
 import ta from 'time-ago';
-import v from 'voca';
+import Case from 'case';
 
 class CompactListItemTemplate extends Component {
 
@@ -11,12 +10,12 @@ class CompactListItemTemplate extends Component {
       <div className="item">
 
           <div className="ui tiny image">
-            <img src="https://placeimg.com/80/80/tech/grayscale"/>
+            <img alt="Temp thumbnail" src="https://placeimg.com/80/80/tech/grayscale"/>
           </div>
 
           <div className="middle aligned content">
             <h3 className="header">
-              { v.titleCase( this.props.item.title) }
+              { Case.title( this.props.item.title) }
 
             </h3>
             <p className="meta">{ta.ago( this.props.item.datetime)}</p>

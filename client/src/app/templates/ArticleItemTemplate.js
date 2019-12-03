@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import v from 'voca';
+import Case from 'case';
 import ta from 'time-ago';
 
 class ArticleItemTemplate extends Component {
@@ -12,9 +12,9 @@ class ArticleItemTemplate extends Component {
   render() {
     return (
       <article className="eight wide column">
-        <img src="https://placeimg.com/640/480/tech/grayscale" className="ui fluid image"/>
+        <img alt="Temp thumbnail" src="https://placeimg.com/640/480/tech/grayscale" className="ui fluid image"/>
         <h3 className="uk-card-title">
-          { v.titleCase( this.props.item.title) }
+          { Case.title( this.props.item.title) }
         </h3>
         <p className="uk-card-meta">
           { ta.ago( this.props.item.datetime ) }

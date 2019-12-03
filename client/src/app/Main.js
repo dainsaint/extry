@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-
-import ProcessDebug from './ProcessDebug.js';
 import Module from './Module.js';
 
 import sugar from 'sugar';
