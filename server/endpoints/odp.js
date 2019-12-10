@@ -3,8 +3,13 @@ const
   sugar = require('sugar'),
   axios = require('axios'),
   Case = require('case'),
+  sql = require('mysql-bricks'),
 
+  transform = require('./odp/transform.js'),
   geocode = require('../utilities/geocode.js');
+
+
+const select = sql.select, like = sql.like;
 
 sugar.extend();
 
@@ -15,86 +20,51 @@ var app = module.exports = express();
 const openDataPhillyApi = axios.create({ baseURL: "https://phl.carto.com/api/v2/" });
 const fishtownZips = ['19125', '19122', '19123', '19106'];
 
-var inspectionTransform =  function( item )
+
+function endpoint( query, transform )
 {
-    return {
-      id: item.cartodb_id,
-      title: Case.title( item.address ),
-      name: Case.title( item.ownername ),
-      description: Case.sentence( item.inspectiondescription ),
-      location: {
-        address: Case.title( item.address ),
-        lat: item.geocode_x,
-        long: item.geocode_y
-      },
-      datetime: item.inspectioncompleted
+  return async (req, res) => {
+    const result = await openDataPhillyApi.get( '/sql',{ params:{ q: query } })
+
+    var rows = result.data.rows;
+
+    if( transform )
+    {
+      var items = rows.map( transform );
+      const expanded = await geocode.expand( items );
+      res.send( items );
+    } else {
+      res.send( rows );
     }
+
+  }
 }
 
-var appealTransform =  function( item )
-{
-    return {
-      id: item.cartodb_id,
-      title: Case.title( item.address ),
-      name: Case.title( item.ownername),
-      description: Case.sentence( item.appealgrounds ),
-      location: {
-        address: Case.title( item.address ),
-        lat: item.geocode_x,
-        long: item.geocode_y
-      },
-      datetime: item.processeddate
-    }
-}
+var fishtownQuery = select().where(like('zip', `(${ fishtownZips.join('|') })%`)).limit(10);
+var aq = fishtownQuery.clone()
+  .from('li_appeals')
+  .orderBy('processeddate desc')
+  .limit(10)
+
+// console.log( aq.toString() );
+
+var appealsQuery = "SELECT * FROM li_appeals WHERE zip SIMILAR TO '(19125|19122|19123|19106)%' AND date_scheduled IS NOT NULL ORDER BY date_scheduled DESC LIMIT 10";
+
+app.get("/odp/appeals/raw", endpoint( appealsQuery ) );
+app.get("/odp/appeals", endpoint( appealsQuery, transform.appeals ) );
 
 
+var demolitionsQuery = "SELECT * FROM li_demolitions WHERE zip SIMILAR TO '(19125|19122|19123|19106)%' ORDER BY start_date DESC LIMIT 10";
 
+app.get("/odp/demolitions/raw", endpoint( demolitionsQuery ) );
+app.get("/odp/demolitions", endpoint( demolitionsQuery, transform.demolitions ) );
 
-app.get( "/odp/inspections", async (req, res) => {
-  const result = await openDataPhillyApi.get( '/sql',{
-    params:{
-      q: "SELECT * FROM li_case_inspections WHERE zip SIMILAR TO '(19125|19122|19123|19106)%' ORDER BY inspectioncompleted DESC LIMIT 10"
-    }
-  })
+var permitsQuery = "SELECT * FROM li_permits WHERE zip SIMILAR TO '(19125|19122|19123|19106)%' AND permitdescription SIMILAR TO '(NEW|DEMOLITION)%' ORDER BY permitissuedate DESC LIMIT 10";
 
-  var items = result.data.rows.map( inspectionTransform );
-  const expanded = await geocode.expand( items );
-  res.send( expanded );
-})
+app.get("/odp/permits/raw", endpoint( permitsQuery ) );
+app.get("/odp/permits", endpoint( permitsQuery, transform.permits ) );
 
-app.get( "/odp/inspections/raw", async (req, res) => {
-  const result = await openDataPhillyApi.get( '/sql',{
-    params:{
-      q: "SELECT * FROM li_case_inspections WHERE zip SIMILAR TO '(19125|19122|19123|19106)%' ORDER BY inspectioncompleted DESC LIMIT 10"
-    }
-  })
+var inspectionsQuery = "SELECT * FROM li_case_inspections WHERE zip SIMILAR TO '(19125|19122|19123|19106)%' ORDER BY inspectioncompleted DESC LIMIT 10"
 
-  var items = result.data.rows;
-  res.send( items );
-})
-
-
-
-app.get( "/odp/appeals", async (req, res) => {
-  const result = await openDataPhillyApi.get( '/sql',{
-    params:{
-      q: "SELECT * FROM li_appeals WHERE zip SIMILAR TO '(19125|19122|19123|19106)%' ORDER BY processeddate DESC LIMIT 10"
-    }
-  })
-
-  var items = result.data.rows.map( appealTransform );
-  const expanded = await geocode.expand( items );
-  res.send( items );
-})
-
-
-app.get( "/odp/appeals/raw", async (req, res) => {
-  const result = await openDataPhillyApi.get( '/sql',{
-    params:{
-      q: "SELECT * FROM li_appeals WHERE zip SIMILAR TO '(19125|19122|19123|19106)%' ORDER BY processeddate DESC LIMIT 10"
-    }
-  })
-
-  var items = result.data.rows;
-  res.send( items );
-})
+app.get("/odp/inspections/raw", endpoint( inspectionsQuery ) );
+app.get("/odp/inspections", endpoint( inspectionsQuery, transform.inspections ) );

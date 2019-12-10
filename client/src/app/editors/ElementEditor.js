@@ -15,11 +15,16 @@ class ElementEditor extends Component {
     this.props.onElementChange( this.props.element.id, {count: e.target.value} )
   }
 
+  onElementDelete = (e) => {
+    this.props.onElementDelete( this.props.element.id )
+  }
+
 
   render() {
     return (
 
-      <form className="ui form segment">
+      <form className="ui form segment relative">
+
 
         <div className="field">
           <label>Datasource</label>
@@ -27,6 +32,8 @@ class ElementEditor extends Component {
             <option value="/fna/meetings">Zoning Hearings</option>
             <option value="/odp/inspections">L&amp;I Inspections</option>
             <option value="/odp/appeals">L&amp;I Appeals</option>
+            <option value="/odp/demolitions">L&amp;I Demolitions</option>
+            <option value="/odp/permits">L&amp;I Permits</option>
           </select>
         </div>
 
@@ -45,6 +52,10 @@ class ElementEditor extends Component {
           <label>Item Count</label>
           <input type="range" min="1" max="10" defaultValue={ this.props.element.count} onChange={ this.onCountChange }/>
         </div>
+
+
+        <a className="ui mini button red" onClick={ this.onElementDelete }><i className="ui icon trash"></i> Delete Element</a>
+
 
       </form>
 

@@ -6,6 +6,7 @@ class CompactListItemTemplate extends Component {
 
   render() {
     const actionButton = this.props.item.action ? <a className="ui button primary" href={ this.props.item.action.url }>{ this.props.item.action.name }</a> : null;
+    const dateTime = new Date( this.props.item.datetime );
     return (
       <div className="item">
 
@@ -18,12 +19,14 @@ class CompactListItemTemplate extends Component {
               { Case.title( this.props.item.title) }
 
             </h3>
-            <p className="meta">{ta.ago( this.props.item.datetime)}</p>
+            <p className="meta">{ dateTime.format('{Dow}, {Mon} {do} at {h}{tt}')}</p>
             <p>{ actionButton }</p>
           </div>
       </div>
     )
   }
 }
+
+//{ta.ago( this.props.item.datetime)}
 
 export default CompactListItemTemplate;

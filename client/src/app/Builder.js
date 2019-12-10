@@ -32,20 +32,20 @@ class Builder extends Component {
             }
           ]
         },
-
-        {
-          id: "ADAJO",
-          title: "Appeals",
-
-          elements: [
-            {
-              id: 'ADMLS',
-              endpoint: "/odp/appeals",
-              type: "Map",
-              count: 20
-            }
-          ]
-        }
+        //
+        // {
+        //   id: "ADAJO",
+        //   title: "Appeals",
+        //
+        //   elements: [
+        //     {
+        //       id: 'ADMLS',
+        //       endpoint: "/odp/appeals",
+        //       type: "Map",
+        //       count: 20
+        //     }
+        //   ]
+        // }
       ]
     }
   }
@@ -70,12 +70,39 @@ class Builder extends Component {
     });
   }
 
+  onModuleDelete = (id) => {
+    this.setState( state => {
+      const modules = state.modules.filter( module => module.id !== id );
+      return { ...state, modules };
+    })
+  }
+
+  onModuleCreate = () => {
+
+    var blankModule = {
+      id: Math.random().toString(36).substring(7),
+      title: "New Module",
+      elements: []
+    };
+
+
+
+    this.setState( state => {
+
+      const modules = state.modules.add( blankModule );
+
+      return { ...state, modules }
+    });
+
+    this.onModuleChange( blankModule.id, {} )
+  }
+
 
   render() {
 
     return (
       <div className="app">
-        <Sidebar modules={ this.state.modules } onModuleChange={ this.onModuleChange }/>
+        <Sidebar modules={ this.state.modules } onModuleChange={ this.onModuleChange } onModuleCreate={ this.onModuleCreate } onModuleDelete={ this.onModuleDelete }/>
         <Main modules={ this.state.modules }/>
       </div>
     );

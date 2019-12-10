@@ -10,16 +10,17 @@ class Main extends Component {
     const modules = this.props.modules.map( module => <Module key={module.id} module={ module }/> )
     return (
       <main>
-        <h1 className="ui header">
-          <div className="content">
-          Fishtown Local Newsletter
-          <div className="sub header">
-            { new Date().medium() }
-          </div>
-          </div>
-        </h1>
 
         <div className="ui container">
+          <h1 className="ui header">
+            <div className="content">
+            Fishtown Local Newsletter
+            <div className="sub header">
+              { new Date().medium() }
+            </div>
+            </div>
+          </h1>
+
           { modules }
         </div>
       </main>

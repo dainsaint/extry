@@ -24,17 +24,18 @@
 .app aside
 {
   background: #EEE;
-  width: 300px;
+  width: 340px;
   position: fixed;
   left:0px;
   top:0px;
   bottom:0px;
   padding: 2em 1em;
+  overflow-y: auto;
 }
 
 .app main
 {
-  margin-left:300px;
+  margin-left:340px;
   padding: 2em;
 }
 

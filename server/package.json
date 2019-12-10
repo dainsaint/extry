@@ -30,11 +30,13 @@
     "express": "^4.17.1",
     "gcal": "^1.0.3",
     "googleapis": "^45.0.0",
+    "mysql-bricks": "^1.1.1",
     "node-zillow": "^2.0.0",
     "nodemon": "^1.19.4",
     "passport": "^0.4.0",
     "passport-google-oauth": "^2.0.0",
     "rxjs": "^6.5.3",
+    "sql-bricks": "^2.0.4",
     "sugar": "^2.0.6"
   }
 }
