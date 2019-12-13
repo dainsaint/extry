@@ -36,7 +36,7 @@ class ModuleEditor extends Component {
       id: Math.random().toString(36).substring(7),
       endpoint: "fna/meetings",
       type: "List",
-      count: 5
+      count: 1
     };
 
     const elements = this.props.module.elements.add( blankElement );
@@ -52,48 +52,71 @@ class ModuleEditor extends Component {
     const elements = this.props.module.elements.map( element => <ElementEditor key={element.id} element={ element } onElementChange={ this.onElementChange } onElementDelete={ this.onElementDelete }/> );
     return (
       <div className="ui segment">
-        <div className="title">
-          <i className="dropdown icon"></i>
-          { this.props.module.title }
-        </div>
 
-        <div className="content">
-          <form className="ui form">
 
-            <div className="field">
-              <label>Title</label>
-              <input
-                className="uk-input"
-                type="text"
-                placeholder="Title"
-                defaultValue={ this.props.module.title }
-                onChange={ this.onTitleChange }
-              />
-            </div>
-
-            <div className="field">
-              <label>Summary</label>
-              <textarea
-                className="ui textarea"
-                type="text"
-                placeholder="Summary"
-                defaultValue={ this.props.module.summary }
-                onChange={ this.onSummaryChange }
-              />
-            </div>
-
-          </form>
-
-          { elements }
-
-          <div className="ui divider"></div>
-
-          <div class="fluid ui mini buttons">
-            <CreateElementButton onElementCreate={ this.onElementCreate }/>
-            <DeleteModuleButton onModuleDelete={ this.onModuleDelete }/>
+          <div className="title">
+            <i className="dropdown icon"></i>
+            { this.props.module.title }
           </div>
 
-        </div>
+          <div className="content">
+
+            <div className="ui segments">
+
+            <div className="ui segment">
+
+              <form className="ui form">
+
+                <div className="field">
+                  <label>Title</label>
+                  <input
+                    className="uk-input"
+                    type="text"
+                    placeholder="Title"
+                    defaultValue={ this.props.module.title }
+                    onChange={ this.onTitleChange }
+                  />
+                </div>
+
+                <div className="field">
+                  <label>Summary</label>
+                  <textarea
+                    className="ui textarea"
+                    type="text"
+                    placeholder="Summary"
+                    defaultValue={ this.props.module.summary }
+                    onChange={ this.onSummaryChange }
+                  />
+                </div>
+
+              </form>
+            </div>
+
+            <div className="ui secondary segment">
+              <h4 className="ui header">Elements</h4>
+              { elements }
+
+            </div>
+
+
+            <div className="ui grey segment">
+
+
+              <div className="fluid ui mini buttons">
+                <CreateElementButton onElementCreate={ this.onElementCreate }/>
+                <DeleteModuleButton onModuleDelete={ this.onModuleDelete }/>
+              </div>
+
+            </div>
+
+          </div>
+
+          </div>
+
+
+
+
+
       </div>
     );
   }

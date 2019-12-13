@@ -11,7 +11,8 @@ dotenv.config();
 //Modules
 const
   fna = require("./endpoints/fna"),
-  odp = require("./endpoints/odp");
+  odp = require("./endpoints/odp"),
+  zil = require("./endpoints/zil");
 
 const app = express()
 const port = process.env.PORT || 3001;
@@ -23,6 +24,7 @@ app.use( cors({ origin: 'http://localhost:3000' } ) );
 // app.use( builder );
 app.use( fna );
 app.use( odp );
+app.use( zil );
 
 app.use('/', staticFiles);
 app.listen( port );

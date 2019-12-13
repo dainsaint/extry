@@ -1,0 +1,43 @@
+{
+    "modules": [
+        {
+            "id": "n10on",
+            "title": "Fishtown Data",
+            "summary": "",
+            "elements": [
+                {
+                    "id": "6f0zj8",
+                    "type": "Chart",
+                    "count": 1,
+                    "endpoint": "/odp/permits"
+                }
+            ]
+        },
+        {
+            "id": "1mwic",
+            "title": "New Construction & Demolition",
+            "summary": "",
+            "elements": [
+                {
+                    "id": "4b9gh",
+                    "type": "Article",
+                    "endpoint": "/odp/permits",
+                    "count": 2
+                }
+            ]
+        },
+        {
+            "id": "c11mvb",
+            "title": "Permits Under Review",
+            "summary": "",
+            "elements": [
+                {
+                    "id": "wore",
+                    "endpoint": "fna/meetings",
+                    "count": 1,
+                    "type": "PermitReview"
+                }
+            ]
+        }
+    ]
+}

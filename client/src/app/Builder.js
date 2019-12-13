@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import sugar from 'sugar';
+import { save } from 'save-file';
 
 import Sidebar from './Sidebar.js';
 import Main from './Main.js';
+import DefaultModules from './data/default.json';
 
 
 class Builder extends Component {
@@ -10,44 +12,7 @@ class Builder extends Component {
   constructor(props)
   {
     super(props);
-
-    this.state = {
-      modules: [
-        {
-          id: "ERUIO",
-          title: "Community Zoning Meetings",
-          summary: 'Want to get involved? All zoning meetings in Fishtown take place at the Fishtown Rec Center, <a href="https://maps.google.com/?q=1202+E+Montgomery+Ave&entry=gmail&source=g">1202 E Montgomery Ave</a>.',
-          elements: [
-            {
-              id: 'NLMSA',
-              endpoint: "/odp/appeals",
-              type: "List",
-              count: 1
-            },
-            {
-              id: 'ADNML',
-              endpoint: "/fna/meetings",
-              type: "CompactList",
-              count: 2
-            }
-          ]
-        },
-        //
-        // {
-        //   id: "ADAJO",
-        //   title: "Appeals",
-        //
-        //   elements: [
-        //     {
-        //       id: 'ADMLS',
-        //       endpoint: "/odp/appeals",
-        //       type: "Map",
-        //       count: 20
-        //     }
-        //   ]
-        // }
-      ]
-    }
+    this.state = { ...DefaultModules };
   }
 
   componentDidMount()
@@ -81,7 +46,8 @@ class Builder extends Component {
 
     var blankModule = {
       id: Math.random().toString(36).substring(7),
-      title: "New Module",
+      title: "Title TK",
+      summary: "Summary TK",
       elements: []
     };
 
@@ -97,12 +63,19 @@ class Builder extends Component {
     this.onModuleChange( blankModule.id, {} )
   }
 
+  onExportJson = async () => {
+    console.log( save );
+    await save( JSON.stringify( this.state, null, 4 ), 'newsletter.json' );
+  }
+
+
+
 
   render() {
 
     return (
       <div className="app">
-        <Sidebar modules={ this.state.modules } onModuleChange={ this.onModuleChange } onModuleCreate={ this.onModuleCreate } onModuleDelete={ this.onModuleDelete }/>
+        <Sidebar modules={ this.state.modules } onModuleChange={ this.onModuleChange } onModuleCreate={ this.onModuleCreate } onModuleDelete={ this.onModuleDelete } onExportJson={ this.onExportJson }/>
         <Main modules={ this.state.modules }/>
       </div>
     );

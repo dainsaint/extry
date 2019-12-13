@@ -7,6 +7,7 @@
     "start": "concurrently \"cd client && npm start\" \"cd server && npm start\"",
     "build": "concurrently \"cd client && npm run build\" \"cd server && npm run build\"",
     "start:prod": "cd server && npm run start:prod",
+    "dev": "atom . & npm start",
     "heroku-postbuild": "npm run build"
   },
   "dependencies": {

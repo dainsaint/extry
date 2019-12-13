@@ -4,10 +4,10 @@ class NoItemsTemplate extends Component {
 
   render() {
     return (
-      <div class="ui placeholder segment">
-        <div class="ui icon header">
-          <i class="minus circle icon"></i>
-          No items matching criteria.
+      <div className="ui placeholder segment">
+        <div className="ui icon header">
+          <i className="minus circle icon"></i>
+          No matching items.
         </div>
       </div>
     )

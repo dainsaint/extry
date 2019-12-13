@@ -6,7 +6,7 @@ class CompactListItemTemplate extends Component {
 
   render() {
     const actionButton = this.props.item.action ? <a className="ui button primary" href={ this.props.item.action.url }>{ this.props.item.action.name }</a> : null;
-    const dateTime = new Date( this.props.item.datetime );
+    const dateTime = new Date( this.props.item.date.datetime );
     return (
       <div className="item">
 

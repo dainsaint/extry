@@ -30,6 +30,7 @@
     "express": "^4.17.1",
     "gcal": "^1.0.3",
     "googleapis": "^45.0.0",
+    "json2csv": "^4.5.4",
     "mysql-bricks": "^1.1.1",
     "node-zillow": "^2.0.0",
     "nodemon": "^1.19.4",
@@ -37,6 +38,7 @@
     "passport-google-oauth": "^2.0.0",
     "rxjs": "^6.5.3",
     "sql-bricks": "^2.0.4",
+    "streetview": "0.0.3",
     "sugar": "^2.0.6"
   }
 }

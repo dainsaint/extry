@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 
 import axios from 'axios'
 
+
 import ListTemplate from './templates/ListTemplate.js'
 import CompactListTemplate from './templates/CompactListTemplate.js'
 import MapTemplate from './templates/MapTemplate.js'
 import ArticleTemplate from './templates/ArticleTemplate.js'
+import PermitReviewTemplate from './templates/permitreview/PermitReviewTemplate.js'
 
 
 
@@ -40,6 +42,8 @@ class Element extends Component {
   componentDidMount()
   {
     this.fetch();
+
+
   }
 
   componentDidUpdate( prevProps, prevState )
@@ -58,7 +62,8 @@ class Element extends Component {
       Map: MapTemplate,
       List: ListTemplate,
       CompactList: CompactListTemplate,
-      Article: ArticleTemplate
+      Article: ArticleTemplate,
+      PermitReview: PermitReviewTemplate
     };
 
     const Template = templates[ this.props.element.type ] || ListTemplate;

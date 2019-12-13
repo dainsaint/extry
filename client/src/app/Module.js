@@ -12,7 +12,7 @@ class Module extends Component {
 
 
     return (
-      <article className="ui segment ">
+      <article className="ui segment vertical">
         <h2 className="ui header">{ this.props.module.title }</h2>
         <p className="lead">
            { ReactHtmlParser(this.props.module.summary) }

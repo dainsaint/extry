@@ -13,7 +13,7 @@ class ArticleTemplate extends Component {
     sugar.extend();
     const items = this.props.items.map( item => <ArticleItemTemplate key={item.id} item={item}/> ).first(this.props.count);
     return (
-      <section className="ui grid">
+      <section className="ui items">
         { items }
       </section>
     )

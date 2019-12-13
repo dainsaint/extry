@@ -20,6 +20,7 @@ class ElementEditor extends Component {
   }
 
 
+
   render() {
     return (
 
@@ -44,6 +45,8 @@ class ElementEditor extends Component {
             <option value="CompactList">Compact List</option>
             <option value="Article">Article</option>
             <option value="Map">Map</option>
+            <option disabled="disabled">----</option>
+            <option value="PermitReview">Permit Review</option>
 
           </select>
         </div>

@@ -18,6 +18,10 @@ class Sidebar extends Component {
         <div className="ui fluid buttons">
           <CreateModuleButton onModuleCreate={ this.props.onModuleCreate }/>
         </div>
+
+        <div className="ui divider"></div>
+        <a href="#" className="ui link" onClick={ this.props.onExportJson }><i className="ui icon download"></i> Export to JSON</a>
+
       </aside>
     );
   }
