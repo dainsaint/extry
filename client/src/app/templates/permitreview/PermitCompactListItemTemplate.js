@@ -17,7 +17,7 @@ class PermitCompactListItemTemplate extends Component {
 
           <div className="middle aligned content">
             <h3 className="header">
-              <i class="ui calendar icon"></i> { Case.title( item.title) }
+              <i className="ui calendar icon"></i> { Case.title( item.title) }
 
             </h3>
             <p className="meta">{ dateTime.format('{Dow}, {Mon} {do} at {h}{tt}')} ({ actionButton })</p>

@@ -21,7 +21,7 @@ class ArticleItemTemplate extends Component {
 
     const svImg = `https://maps.googleapis.com/maps/api/streetview?key=${ process.env.REACT_APP_GOOGLE_MAPS_API_KEY }&size=600x400&location=${ this.props.item.location.address }`;
     const tags = this.props.item.tags ? this.props.item.tags.map( tag => <a key={ tag.name } className="ui horizontal label">{ tag.name }</a>) : null;
-    const people = this.props.item.people ? this.props.item.people.map( person => <div key={ person.name }><strong>{ person.title }:</strong> {person.name} </div>) : null;
+    const people = this.props.item.people ? this.props.item.people.map( person => <p key={ person.name }><strong>{ person.title }:</strong> {person.name} </p>) : null;
 
     return (
 
@@ -43,9 +43,9 @@ class ArticleItemTemplate extends Component {
                 { this.props.item.description }
               </p>
 
-              <p className="meta">
+              <div className="meta">
                 { people }
-              </p>
+              </div>
           </div>
 
       </article>

@@ -6,13 +6,18 @@ import Sidebar from './Sidebar.js';
 import Main from './Main.js';
 import DefaultModules from './data/default.json';
 
+import arrayMove from 'array-move';
+
 
 class Builder extends Component {
 
   constructor(props)
   {
     super(props);
-    this.state = { ...DefaultModules };
+    this.state = {
+      ...DefaultModules,
+      currentModule: null
+    };
   }
 
   componentDidMount()
@@ -20,6 +25,11 @@ class Builder extends Component {
     sugar.extend()
   }
 
+  onSortEnd = ({oldIndex, newIndex}) => {
+    this.setState( ({modules}) => ({
+      modules: arrayMove( modules, oldIndex, newIndex )
+    }) )
+  }
 
   onModuleChange = ( id, update ) => {
     this.setState( state => {
@@ -31,15 +41,24 @@ class Builder extends Component {
           return module;
       })
 
-      return { ...state, modules };
+      return { modules };
     });
   }
 
   onModuleDelete = (id) => {
     this.setState( state => {
       const modules = state.modules.filter( module => module.id !== id );
-      return { ...state, modules };
+      return { modules };
     })
+  }
+
+  onModuleSelect = ( id ) =>
+  {
+    this.setState( state => {
+      const currentModule = state.modules.find( module => module.id == id );
+      return { currentModule };
+    })
+
   }
 
   onModuleCreate = () => {
@@ -75,8 +94,19 @@ class Builder extends Component {
 
     return (
       <div className="app">
-        <Sidebar modules={ this.state.modules } onModuleChange={ this.onModuleChange } onModuleCreate={ this.onModuleCreate } onModuleDelete={ this.onModuleDelete } onExportJson={ this.onExportJson }/>
-        <Main modules={ this.state.modules }/>
+        <Sidebar modules={ this.state.modules }
+          currentModule={ this.state.currentModule }
+          onModuleChange={ this.onModuleChange }
+          onModuleCreate={ this.onModuleCreate }
+          onModuleDelete={ this.onModuleDelete }
+          onModuleSelect={ this.onModuleSelect }
+          onExportJson={ this.onExportJson }
+          onSortEnd={ this.onSortEnd }
+        />
+        <Main modules={ this.state.modules }
+          currentModule={ this.state.currentModule }
+          onModuleSelect={ this.onModuleSelect }
+        />
       </div>
     );
   }

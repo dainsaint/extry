@@ -7,11 +7,11 @@ class Main extends Component {
 
   render() {
     sugar.extend();
-    const modules = this.props.modules.map( module => <Module key={module.id} module={ module }/> )
+    const modules = this.props.modules.map( module => <Module key={module.id} module={ module } currentModule={ this.props.currentModule}/> )
     return (
       <main>
 
-        <div className="ui container">
+        <div className="ui text container">
           <h1 className="ui header">
             <div className="content">
             Fishtown Local Newsletter

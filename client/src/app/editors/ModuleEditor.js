@@ -51,73 +51,60 @@ class ModuleEditor extends Component {
   render() {
     const elements = this.props.module.elements.map( element => <ElementEditor key={element.id} element={ element } onElementChange={ this.onElementChange } onElementDelete={ this.onElementDelete }/> );
     return (
-      <div className="ui segment">
+      <section>
 
+      <div className="ui segments">
 
-          <div className="title">
-            <i className="dropdown icon"></i>
-            { this.props.module.title }
-          </div>
+        <div class="ui segment">
 
-          <div className="content">
+          <form className="ui form">
 
-            <div className="ui segments">
-
-            <div className="ui segment">
-
-              <form className="ui form">
-
-                <div className="field">
-                  <label>Title</label>
-                  <input
-                    className="uk-input"
-                    type="text"
-                    placeholder="Title"
-                    defaultValue={ this.props.module.title }
-                    onChange={ this.onTitleChange }
-                  />
-                </div>
-
-                <div className="field">
-                  <label>Summary</label>
-                  <textarea
-                    className="ui textarea"
-                    type="text"
-                    placeholder="Summary"
-                    defaultValue={ this.props.module.summary }
-                    onChange={ this.onSummaryChange }
-                  />
-                </div>
-
-              </form>
+            <div className="field">
+              <label>Title</label>
+              <input
+                className="uk-input"
+                type="text"
+                placeholder="Title TK"
+                defaultValue={ this.props.module.title }
+                onChange={ this.onTitleChange }
+              />
             </div>
 
-            <div className="ui secondary segment">
-              <h4 className="ui header">Elements</h4>
-              { elements }
-
+            <div className="field">
+              <label>Summary</label>
+              <textarea
+                className="ui textarea"
+                type="text"
+                placeholder="Summary TK"
+                defaultValue={ this.props.module.summary }
+                onChange={ this.onSummaryChange }
+              />
             </div>
 
+          </form>
 
-            <div className="ui grey segment">
+        </div>
 
-
-              <div className="fluid ui mini buttons">
-                <CreateElementButton onElementCreate={ this.onElementCreate }/>
-                <DeleteModuleButton onModuleDelete={ this.onModuleDelete }/>
-              </div>
-
-            </div>
-
+        <div className="ui segment">
+          <h4 className="ui header">Elements</h4>
+          { elements }
+          <div className="ui fluid buttons">
+            <CreateElementButton onElementCreate={ this.onElementCreate }/>
           </div>
-
-          </div>
-
-
-
-
+        </div>
 
       </div>
+
+      <div className="ui divider"></div>
+
+
+
+
+      <div className="ui fluid buttons">
+        <DeleteModuleButton onModuleDelete={ this.onModuleDelete }/>
+      </div>
+
+    </section>
     );
   }
 }
