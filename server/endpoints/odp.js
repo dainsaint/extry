@@ -61,3 +61,19 @@ app.get("/odp/appeals/address", async (req, res) => {
   var ep =  odpapi.endpoint( addressQueryTemplate );
   await ep( req, res );
 });
+
+
+
+// WHERE zip SIMILAR TO '(19125|19122|19123|19106)%'
+// AND permitdescription SIMILAR TO '(NEW|DEMOLITION)%'
+var countQuery = `SELECT
+  date_part( 'year', permitissuedate ) as year,
+  SUM(CASE WHEN permitdescription SIMILAR TO '(NEW)%' THEN 1 ELSE 0 END) as new_construction,
+  SUM(CASE WHEN permitdescription SIMILAR TO '(DEMOLITION)%' THEN 1 ELSE 0 END) as demolition
+  FROM li_permits
+  WHERE zip SIMILAR TO '(19125|19122|19123|19106)%'
+  AND permitdescription SIMILAR TO '(NEW|DEMOLITION)%'
+  group by year
+`
+
+app.get("/odp/permits/count", odpapi.endpoint( countQuery ) );

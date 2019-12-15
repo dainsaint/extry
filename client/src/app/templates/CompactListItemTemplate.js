@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import ta from 'time-ago';
 import Case from 'case';
+import DateElementTemplate from "./DateElementTemplate.js";
 
 class CompactListItemTemplate extends Component {
 
   render() {
     const actionButton = this.props.item.action ? <a className="ui button primary" href={ this.props.item.action.url }>{ this.props.item.action.name }</a> : null;
-    const dateTime = new Date( this.props.item.date.datetime );
+
+
     return (
       <div className="item">
 
@@ -19,7 +21,7 @@ class CompactListItemTemplate extends Component {
               { Case.title( this.props.item.title) }
 
             </h3>
-            <p className="meta">{ dateTime.format('{Dow}, {Mon} {do} at {h}{tt}')}</p>
+            <DateElementTemplate date={this.props.item.date}/>
             <p>{ actionButton }</p>
           </div>
       </div>

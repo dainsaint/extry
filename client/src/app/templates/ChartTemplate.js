@@ -1,29 +1,81 @@
 import React, { Component } from 'react'
-import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
-// import { GoogleMap, LoadScript, Marker } from '@react-g÷oogle-maps/api'
+import { Bar } from 'react-chartjs-2';
+import sugar from 'sugar';
+import Case from 'case';
 
+class ChartTemplate extends Component {
 
-class MapTemplate extends Component {
+  constructor( props )
+  {
+    super( props );
+
+    this.state = {
+      data: {
+        labels: [],
+        datasets: []
+      },
+
+      options: {
+        scales: {
+          xAxes: [{
+            stacked: true
+          }],
+          yAxes: [{
+            stacked: true
+          }]
+        }
+      }
+    }
+  }
+
+  transform() {
+
+    const xAxis = "year";
+    const colors= ["#267FC1", "#F0712C"];
+
+    const items = this.props.items;
+    const fields = Object.keys( items.first() ).filter( x => x != xAxis );
+console.log( fields );
+    const labels = this.props.items.map( item => item[ xAxis ] );
+
+    const datasets = fields.map( (field, i) => ({
+      label: Case.capital( field ),
+      backgroundColor: colors[ i % colors.length ],
+      data: items.map( x => x[field] ).flatten()
+    }));
+
+    const data = { labels, datasets }
+
+    this.setState( state => ({ data }) );
+  }
+
+  hash( items )
+  {
+    return items.map( x => JSON.stringify(x) ).join(',');
+  }
+
+  componentDidMount()
+  {
+    sugar.extend();
+  }
+
+  componentDidUpdate( prevProps, prevState )
+  {
+    if( this.hash( prevProps.items ) !== this.hash(this.props.items) )
+      this.transform();
+  }
 
   render() {
-    const markers = this.props.items.map( item => <Marker key={item.id} name={item.location.address} position={item.location}/> );
+
     return (
-      <div style={{position:"relative", height: "300px"}}>
-
-        <Map
-          google={this.props.google}
-          zoom={14}
-          initialCenter={{lat: 39.971882, lng: -75.128901}}
-          style={{width:"100%", height:"300px"}}
-        >
-          { markers }
-        </Map>
-
+      <div>
+        <Bar
+          data={ this.state.data }
+          options={ this.state.options }
+          />
       </div>
     )
   }
 }
 
-export default GoogleApiWrapper({
-  apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
-})(MapTemplate);
+export default ChartTemplate;

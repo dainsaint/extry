@@ -11,7 +11,9 @@
     "heroku-postbuild": "npm run build"
   },
   "dependencies": {
-    "concurrently": "^5.0.0"
+    "chart.js": "^2.9.3",
+    "concurrently": "^5.0.0",
+    "react-chartjs-2": "^2.8.0"
   },
   "engines": {
     "node": "11.0.0"

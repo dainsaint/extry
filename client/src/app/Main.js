@@ -11,7 +11,7 @@ class Main extends Component {
     return (
       <main>
 
-        <div className="ui text container">
+        <div className="ui text container restrict">
           <h1 className="ui header">
             <div className="content">
             Fishtown Local Newsletter

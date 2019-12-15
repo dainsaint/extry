@@ -7,6 +7,7 @@ import ListTemplate from './templates/ListTemplate.js'
 import CompactListTemplate from './templates/CompactListTemplate.js'
 import MapTemplate from './templates/MapTemplate.js'
 import ArticleTemplate from './templates/ArticleTemplate.js'
+import ChartTemplate from './templates/ChartTemplate.js'
 import PermitReviewTemplate from './templates/permitreview/PermitReviewTemplate.js'
 
 
@@ -63,10 +64,13 @@ class Element extends Component {
       List: ListTemplate,
       CompactList: CompactListTemplate,
       Article: ArticleTemplate,
-      PermitReview: PermitReviewTemplate
+      PermitReview: PermitReviewTemplate,
+      Chart: ChartTemplate
     };
 
-    const Template = templates[ this.props.element.type ] || ListTemplate;
+    const Template = this.props.element.endpoint === "/odp/permits/count" ?
+      ChartTemplate :
+      templates[ this.props.element.type ] || ListTemplate;
 
 
 

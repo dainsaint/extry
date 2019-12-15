@@ -22,7 +22,7 @@ const SortableItem = sortableElement( ({value}) => (
 ));
 
 const SortableContainer = sortableContainer( ({children}) => (
-  <div className="ui fluid segments" style={{userSelect: "none"}}>
+  <div className="ui fluid segments noselect">
     {children}
   </div>
 ))

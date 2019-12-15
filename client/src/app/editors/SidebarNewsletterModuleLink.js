@@ -12,7 +12,7 @@ class SidebarNewsletterModuleLink extends Component {
     const module = this.props.module;
 
     return (
-      <a onClick={ this.onModuleSelect }>
+      <a onClick={ this.onModuleSelect } style={{ cursor: "pointer"}}>
         { module.title }
       </a>
     );

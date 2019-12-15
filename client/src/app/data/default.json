@@ -9,7 +9,7 @@
                     "id": "6f0zj8",
                     "type": "Chart",
                     "count": 1,
-                    "endpoint": "/odp/permits"
+                    "endpoint": "/odp/permits/count"
                 }
             ]
         },

@@ -36,6 +36,8 @@ class ElementEditor extends Component {
               <option value="/odp/appeals">L&amp;I Appeals</option>
               <option value="/odp/demolitions">L&amp;I Demolitions</option>
               <option value="/odp/permits">L&amp;I Permits</option>
+              <option disabled="disabled">--EXPERIMENTAL--</option>
+              <option value="/odp/permits/count">L&amp;I Permits Count</option>
             </select>
           </div>
 
@@ -46,8 +48,9 @@ class ElementEditor extends Component {
               <option value="CompactList">Compact List</option>
               <option value="Article">Article</option>
               <option value="Map">Map</option>
-              <option disabled="disabled">----</option>
+              <option disabled="disabled">--EXPERIMENTAL--</option>
               <option value="PermitReview">Permit Review</option>
+              <option value="Chart">Chart</option>
 
             </select>
           </div>
